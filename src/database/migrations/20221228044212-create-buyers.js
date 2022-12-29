@@ -76,6 +76,12 @@ module.exports = {
       },
       cnpjId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'cnpjs',
+          key: 'id',
+        },
       },
       confirm: {
         type: Sequelize.BOOLEAN,

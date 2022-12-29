@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      sponsors.belongsTo(models.cnpjs, { key: 'cnpjId', as: 'cnpjToSponsors' });
+      sponsors.hasMany(models.offers, { key: 'sponsorId', as: 'sponsorsToOffers' });
     }
   }
   sponsors.init(

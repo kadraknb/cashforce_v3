@@ -34,6 +34,12 @@ module.exports = {
       },
       orderId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'orders',
+          key: 'id',
+        },
       },
     });
   },

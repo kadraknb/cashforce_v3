@@ -50,9 +50,21 @@ module.exports = {
       },
       orderId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'orders',
+          key: 'id',
+        },
       },
       sponsorId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'sponsors',
+          key: 'id',
+        },
       },
     });
   },

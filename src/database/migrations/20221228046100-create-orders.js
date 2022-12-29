@@ -54,15 +54,39 @@ module.exports = {
       },
       cnpjId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'cnpjs',
+          key: 'id',
+        },
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       buyerId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'buyers',
+          key: 'id',
+        },
       },
       providerId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'providers',
+          key: 'id',
+        },
       },
       orderStatusBuyer: {
         defaultValue: 0,

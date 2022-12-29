@@ -88,6 +88,12 @@ module.exports = {
       },
       cnpjId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: 'cnpjs',
+          key: 'id',
+        },
       },
       email: {
         type: Sequelize.STRING,
