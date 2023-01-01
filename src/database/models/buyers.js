@@ -2,19 +2,20 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class buyers extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // buyers.belongsTo(models.cnpjs, { key: 'cnpjId', as: 'cnpjBuyers' });
-      // buyers.hasMany(models.orders, { key: 'buyerId', as: 'orderBuyers' });
+      buyers.belongsTo(models.cnpjs, { foreignKey: 'cnpjId', as: 'cnpjToBuyers' });
+      buyers.hasMany(models.orders, { foreignKey: 'id', as: 'buyerToOrders' });
     }
   }
   buyers.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       name: DataTypes.STRING,
       tradingName: DataTypes.STRING,
       cashforceTax: DataTypes.STRING,
@@ -36,15 +37,23 @@ module.exports = (sequelize, DataTypes) => {
       situationDate: DataTypes.STRING,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
-      cnpjId: DataTypes.INTEGER,
+      cnpjId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'cnpjs',
+          key: 'id',
+        },
+        primaryKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       confirm: DataTypes.BOOLEAN,
       email: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: 'buyers',
-      // underscored: true,
-      // timestamps: false,
     }
   );
   return buyers;

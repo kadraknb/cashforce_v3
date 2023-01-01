@@ -2,19 +2,20 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class offers extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      offers.belongsTo(models.sponsors, { key: 'sponsorId', as: 'sponsorsToOffers' });
-      offers.belongsTo(models.orders, { key: 'orderId', as: 'ordersToOffers' });
+      offers.belongsTo(models.sponsors, { foreignKey: 'sponsorId', as: 'sponsorToOffers' });
+      offers.belongsTo(models.orders, { foreignKey: 'orderId', as: 'orderToOffers' });
     }
   }
   offers.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       tax: DataTypes.STRING,
       tariff: DataTypes.STRING,
       adValorem: DataTypes.STRING,

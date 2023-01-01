@@ -2,23 +2,24 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class orders extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      orders.belongsTo(models.users, { foreignKey: 'userId', as: 'user' });
-      orders.belongsTo(models.buyers, { key: 'buyerId', as: 'buyersToOrder' });
-      orders.belongsTo(models.cnpjs, { key: 'cnpjId', as: 'cnpjToOrders' });
-      orders.belongsTo(models.providers, { key: 'providerId', as: 'providersToOrders' });
-      orders.belongsToMany(models.orders, { key: 'orderId', as: 'orderToOrderportions' });
+      orders.belongsTo(models.users, { foreignKey: 'userId', as: 'userToOrders' });
+      orders.belongsTo(models.buyers, { foreignKey: 'buyerId', as: 'buyerToOrders' });
+      orders.belongsTo(models.cnpjs, { foreignKey: 'cnpjId', as: 'cnpjToOrders' });
+      orders.belongsTo(models.providers, { foreignKey: 'providerId', as: 'providerToOrders' });
+      orders.hasOne(models.orderportions, { foreignKey: 'id', as: 'orderToOrders' });
 
     }
   }
   orders.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       orderNfId: DataTypes.STRING,
       orderNumber: DataTypes.STRING,
       orderPath: DataTypes.STRING,
@@ -32,10 +33,50 @@ module.exports = (sequelize, DataTypes) => {
       value: DataTypes.STRING,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
-      cnpjId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
-      buyerId: DataTypes.INTEGER,
-      providerId: DataTypes.INTEGER,
+      cnpjId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'cnpjs',
+          key: 'id',
+        },
+        primaryKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      userId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        primaryKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      buyerId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'buyers',
+          key: 'id',
+        },
+        primaryKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      providerId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'providers',
+          key: 'id',
+        },
+        primaryKey: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       orderStatusBuyer: DataTypes.STRING,
       orderStatusProvider: DataTypes.STRING,
       deliveryReceipt: DataTypes.STRING,

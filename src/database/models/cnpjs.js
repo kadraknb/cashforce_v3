@@ -2,22 +2,23 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class cnpjs extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      cnpjs.hasMany(models.buyers, { key: 'cnpjId', as: 'cnpjToBuyers' });
-      cnpjs.hasMany(models.providers, { key: 'cnpjId', as: 'cnpjToProviders' });
-      cnpjs.hasMany(models.sponsors, { key: 'cnpjId', as: 'cnpjToSponsors' });
-      cnpjs.hasMany(models.orders, { key: 'cnpjId', as: 'cnpjToOrders' });
+      cnpjs.hasMany(models.buyers, { foreignKey: 'id', as: 'cnpjToBuyers' });
+      cnpjs.hasMany(models.providers, { foreignKey: 'id', as: 'cnpjToProviders' });
+      cnpjs.hasMany(models.sponsors, { foreignKey: 'id', as: 'cnpjToSponsors' });
+      cnpjs.hasMany(models.orders, { foreignKey: 'id', as: 'cnpjToOrders' });
 
     }
   }
   cnpjs.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       cnpj: DataTypes.STRING,
       companyType: DataTypes.STRING,
       createdAt: DataTypes.DATE,
