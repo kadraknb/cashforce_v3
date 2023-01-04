@@ -1,12 +1,12 @@
 require('dotenv').config();
 
 const options = {
-  host: process.env.MYSQL_HOST || 'localhost',
-  port: process.env.MYSQL_PORT || '3306',
+  host: process.env.MYSQLHOST || 'localhost',
+  port: process.env.MYSQLPORT || '3306',
   database: 
-    `${process.env.MYSQL_DB_NAME || 'cashforce_v3'}`,
-  username: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'password',
+    `${process.env.MYSQLDBNAME || 'cashforce_v3'}`,
+  username: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'password',
   dialect: 'mysql',
   logging: process.env.DEBUG !== 'false',
 };
@@ -16,6 +16,9 @@ module.exports = {
     ...options,
   },
   test: {
+    ...options,
+  },
+  production: {
     ...options,
   },
 };
