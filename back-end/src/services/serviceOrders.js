@@ -8,7 +8,7 @@ const getAllOrders = async () => {
       {
         model: providers,
         as: 'providerToOrders',
-        attributes: ['name'],
+        attributes: ['id', 'name'],
       },
     ],
   });

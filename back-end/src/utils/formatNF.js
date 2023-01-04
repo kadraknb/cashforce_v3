@@ -14,6 +14,7 @@ const formatNF = (NF) => {
   const data = NF.map((itemNF) => ({
     nNotaFiscal: itemNF.nNf,
     sacado: itemNF.buyerToOrders.name,
+    idCedente: itemNF.providerToOrders.id,
     cedente: itemNF.providerToOrders.name,
     emissão: new Date(itemNF.emissionDate).toLocaleDateString(),
     valor: Number(itemNF.value).toLocaleString('pt-BR', {

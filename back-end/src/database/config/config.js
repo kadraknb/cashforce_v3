@@ -6,13 +6,8 @@ const options = {
   database: 
     `${process.env.MYSQL_DB_NAME || 'cashforce_v3'}`,
   username: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || '1234',
+  password: process.env.MYSQL_PASSWORD || 'password',
   dialect: 'mysql',
-  dialectOptions: {
-    timezone: '+00:00',
-    mode: 'NO_AUTO_VALUE_ON_ZERO',
-    charset: 'utf8mb4',
-  },
   logging: process.env.DEBUG !== 'false',
 };
 

@@ -25,7 +25,7 @@ services:
     restart: always
     ports:
       - 3306:3306
-      - 33060:33060
+      - 3360:3360
     networks:
       - api_net
 
