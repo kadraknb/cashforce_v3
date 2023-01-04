@@ -10,7 +10,7 @@ services:
       - 33065:3306
 
   api:
-    container_name: api
+    container_name: cashforce
     image: node:16
     restart: always
     ports:
