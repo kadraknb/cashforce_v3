@@ -1,7 +1,6 @@
 <script>
 import DetailProvider from './DetailProvider.vue'
-import getProvider from '../services/getProvider';
-import getTableNF from '../services/getTableNF';
+import getAPI from '../services/getAPI';
 
 export default {
   components: {
@@ -15,19 +14,19 @@ export default {
     }
   },
   beforeCreate() {
-    getTableNF().then(res => {
-      this.tableNF = res.data;
-    })
+    const getOrders = async () => getAPI('GET', '/orders')
+      .then(({ data: orders }) => this.tableNF = orders)
+    getOrders()
   },
   methods: {
     viewProvider(id) {
-      getProvider(id).then(res => {
-        this.provider = res.data;
-        this.showProvider = true;
-        })
+      const getProvider = async () => getAPI('GET', `/Providers/${id}`)
+        .then(({ data: Provider }) => this.provider = Provider)
+        getProvider()
+        this.showProvider = true
     },
     showProviderFalse() {
-        this.showProvider = false;
+      this.showProvider = false;
     }
   },
 }
@@ -60,7 +59,7 @@ export default {
         </tr>
       </tbody>
     </table>
-    <DetailProvider v-if="this.showProvider"  v-bind="{provider, showProviderFalse}" />
+    <DetailProvider v-if="this.showProvider" v-bind="{ provider, showProviderFalse }" />
   </div>
 </template>
 
@@ -102,6 +101,7 @@ export default {
   background-color: #ffffff;
   transition: 0.5s;
 }
+
 #tableNF tbody button:hover {
   color: #ffffff;
   background-color: #727D94;

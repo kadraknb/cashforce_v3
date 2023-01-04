@@ -3,12 +3,6 @@ export default {
   props: ['provider', 'showProviderFalse'],
 
   methods: {
-    viewProvider() {
-      getProvider(1).then(res => {
-        this.provider = res.data;
-        this.showProvider = true;
-      })
-    },
     onclickCloche() {
       this.showProviderFalse()
     }
