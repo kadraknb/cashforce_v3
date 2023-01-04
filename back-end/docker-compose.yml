@@ -1,23 +1,6 @@
 version: "3"
 
 services:
-  node:
-    build: .
-    container_name: cashforce
-    tty: true
-    stdin_open: true
-    command: bash
-    restart: always
-    working_dir: /app
-    volumes:
-      - ./:/app
-    depends_on:
-      - db
-    ports:
-      - 3000:3000
-    networks:
-      - api_net
-
   db:
     container_name: db_cashforce
     image: mysql:8.0.23
@@ -26,6 +9,8 @@ services:
     ports:
       - 3306:3306
       - 3360:3360
+    environment:
+      MYSQL_ROOT_PASSWORD: password
     networks:
       - api_net
 
