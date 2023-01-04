@@ -6,10 +6,10 @@ import IconHandshake from '../icons/IconHandshake.vue'
 
 <template>
   <aside id="asideNF">
-    <div class="asideLogo">
+    <a href="https://cashforce.com.br/" class="asideLogo">
       <IconLogo />
       <Logo />
-    </div>
+    </a>
     <div id="asideMenuNav">
       <div id="rectangle"></div>
       <IconHandshake />

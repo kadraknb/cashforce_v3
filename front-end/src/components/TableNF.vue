@@ -20,8 +20,8 @@ export default {
     })
   },
   methods: {
-    viewProvider() {
-      getProvider(1).then(res => {
+    viewProvider(id) {
+      getProvider(id).then(res => {
         this.provider = res.data;
         this.showProvider = true;
         })
@@ -56,7 +56,7 @@ export default {
           <td>{{ proposta.emissão }}</td>
           <td class="green">R$ {{ proposta.valor }}</td>
           <td id="statusNF" class="green">{{ proposta.status }}</td>
-          <td><button v-on:click="viewProvider">Dados do cedente</button></td>
+          <td><button v-on:click="viewProvider(proposta.idCedente)">Dados do cedente</button></td>
         </tr>
       </tbody>
     </table>
