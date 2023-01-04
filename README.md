@@ -1,3 +1,5 @@
+# branche dedicada para o deploy
+
 ## 🚀 Teste o deploy da aplicação
 
 - [cashforce.app](https://cashforce-production.up.railway.app/)
