@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fetch = axios.create({
-  baseURL: `https://cashforce-api-production.up.railway.app`,
+  baseURL: 'http://localhost:3010',
   timeout: 10000,
   headers: {
     'Accept': 'application/json',
